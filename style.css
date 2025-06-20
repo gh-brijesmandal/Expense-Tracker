@@ -140,7 +140,6 @@ h2 {
 }
 
 #transaction-list::-webkit-scrollbar-thumb {
-    /* pass */
     background-color: #cbd5e0;
 }
 
@@ -150,7 +149,6 @@ h2 {
 }
 
 #transaction-list::-webkit-scrollbar-thumb:hover {
-    /* pass */
     background-color: #a0aec0;
 }
 

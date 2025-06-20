@@ -54,7 +54,7 @@ function createTransactionElement(transaction){
     // todo :  left to improve the amount formatting
     li.innerHTML = `
         <span>${transaction.description}</span>
-        <span>${transaction.amount}
+        <span>${formatCurrency(transaction.amount)}
         <button class = "delete-btn" onclick = "removeTransaction(${transaction.id})">x</button>
         </span>
     `;
@@ -70,4 +70,29 @@ function updateSummary()
 
     const expense = transactions.filter(transaction => transaction.amount < 0).reduce((acc,transaction) => acc + transaction.amount,0);
 
+    balanceEl.textContent = formatCurrency(balance);
+    incomeAmountEl.textContent = formatCurrency(income);
+    expenseAmountEl.textContent = formatCurrency(expense);
 }
+
+
+function formatCurrency(number){
+    return new Intl.NumberFormat("en-US",
+    {
+        style:"currency",
+        currency: "USD",
+    }).format(number);
+}
+
+function removeTransaction(id) {
+    transactions = transactions.filter(transaction =>  transaction.id != id);
+
+    localStorage.setItem("transactions", JSON.stringify(transactions));
+
+    updateTransactionList();
+    updateSummary();
+}
+
+
+updateSummary();
+updateTransactionList();
